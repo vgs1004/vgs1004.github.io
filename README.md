@@ -15,11 +15,6 @@ title: "Your post title"
 series: "Learning Log #2"
 summary: "One or two sentences shown in the post list."
 date: 2026-11-14 00:00:00 +0100
-outline:
-  - "The question I started with"
-  - "What I tried"
-  - "What worked (with an example)"
-  - "What I learned"
 image: /files/log-02-cover.png   # optional: a cover image, also good for the LinkedIn post
 ---
 ```

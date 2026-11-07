@@ -7,30 +7,35 @@ date: 2026-11-07 00:00:00 +0100
 resources:
   - name: "Handwritten Notes Maker on GitHub"
     url: "https://github.com/vgs1004/MyProjects/tree/main/Handwritten%20Notes%20Maker%20%28Python%29"
-    note: "notebook, format guide and prompt in one folder"
-outline:
-  - "What I wanted: handwritten-style notes for interview prep"
-  - "Method 1: one long prompt, Claude makes the whole PDF"
-  - "Method 2: the design is fixed, Claude writes only the content"
-  - "The two methods as a flow"
-  - "What I learned"
+    note: "Method 1 prompt and SQL notes, Method 2 notebook, installation guide and n8n notes"
+image: /files/log-01-cover.jpg
 ---
 
 **What I wanted:** handwritten-looking notes for my interview prep (DAX, SQL, Power BI), like the ones people share online, without drawing them by hand.
 
 ## Method 1: one long prompt, Claude makes the whole PDF
 
-My first approach was one long prompt, the same one for every topic. In short, it asked Claude to:
+My first approach was one long prompt, the same one for every topic:
 
-> Make handwritten-style notes on *[topic]* as a PDF. Check reference websites first, then write as many pages as needed so that I really understand the concept.
+> Create a downloadable PDF called "[TOPIC]: Zero to Confident." Teach me [TOPIC] from scratch. Assume I'm a complete beginner with no prior knowledge of the subject or its tools.
+>
+> Check official documentation or other authoritative references before writing. Include a short list of the sources you used at the end.
+>
+> Make the PDF look like handwritten study notes in a spiral notebook, with ruled pages, colored headings, short explanations, and a boxed "Key Takeaway" on each page. Use as many pages as needed to explain the topic clearly.
+>
+> Start with what [TOPIC] is, why it matters, and how its core concepts fit together. Explain unfamiliar terms in plain English and use everyday analogies before introducing technical details. Build from the basics to practical applications, and label advanced material as optional.
+>
+> Walk me through a simple first exercise using sample data or materials where relevant. Then include a few practice exercises of increasing difficulty and two end-to-end projects or worked examples. For each one, show what I need, what to do, what result to expect, and how to check my work or troubleshoot common mistakes.
+>
+> Finish with a quick-reference cheat sheet, beginner Q&A, and a practice roadmap I can follow on my own.
 
-I didn't specify any fonts or design. Claude chose the look, researched the topic, wrote the content and built the PDF, all in one go.
+I described the look in one sentence and left everything else (fonts, layout, how many pages) to Claude. Claude researched the topic, wrote the content, designed the pages and built the PDF, all in one go.
 
 **Why it costs a lot of tokens:**
 - **Claude does every job:** research, writing, layout and creating the PDF itself. All of that work counts.
-- **"As many pages as possible" means a very long answer.**
+- **"As many pages as needed" means a very long answer.**
 - **Every new topic repeats the full job,** including the design work.
-- **Any fix means another full run.** And the look changes a little every time.
+- **Any fix means another full run.** And the look changes from topic to topic.
 
 ## Method 2: the design is fixed, Claude writes only the content
 
@@ -74,6 +79,21 @@ I didn't specify any fonts or design. Claude chose the look, researched the topi
     <div class="loop free-loop">↺ Want a change? Edit one setting and re-run, for free</div>
   </div>
 </div>
+
+## What each method produced
+
+<div class="compare">
+  <figure>
+    <a href="/files/log-01-method1-page.jpg"><img src="/files/log-01-method1-page.jpg" alt="A page from the Method 1 SQL notes"></a>
+    <figcaption><strong>Method 1:</strong> SQL notes, 25 pages. Claude chose the whole design.</figcaption>
+  </figure>
+  <figure>
+    <a href="/files/log-01-method2-page.jpg"><img src="/files/log-01-method2-page.jpg" alt="A page from the Method 2 n8n notes"></a>
+    <figcaption><strong>Method 2:</strong> n8n notes, 42 pages. Same design every time, built for free.</figcaption>
+  </figure>
+</div>
+
+Both full PDFs are in the <a href="https://github.com/vgs1004/MyProjects/tree/main/Handwritten%20Notes%20Maker%20%28Python%29">project folder on GitHub</a>.
 
 ## What I learned
 

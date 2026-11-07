@@ -249,3 +249,12 @@ section, .post-section { scroll-margin-top: 84px; }
 .outline-label { color: var(--muted); }
 .outline li::marker { color: var(--muted); font-weight: 600; }
 .post { margin-top: 0; padding-top: 30px; }
+
+/* Side-by-side sample pages in posts */
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.compare figure { margin: 0; }
+.compare img { width: 100%; border-radius: 10px; border: 1px solid var(--line); box-shadow: var(--shadow); }
+.compare figcaption { font-size: .9rem; color: var(--muted); margin-top: 8px; }
+@media (max-width: 640px) { .compare { grid-template-columns: 1fr; } }
+#blog .grid.two { grid-template-columns: repeat(auto-fill, minmax(320px, 520px)); }
+.b-card img { aspect-ratio: 16 / 10; object-fit: cover; object-position: center 30%; width: 100%; }
