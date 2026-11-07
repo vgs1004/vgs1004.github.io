@@ -240,3 +240,12 @@ section, .post-section { scroll-margin-top: 84px; }
   .arrow::before { left: 50%; right: auto; top: 3px; bottom: 9px; width: 3px; height: auto; transform: translateX(-50%); }
   .arrow::after { left: 50%; right: auto; top: auto; bottom: 0; transform: translateX(-50%); border: 7px solid transparent; border-top: 10px solid var(--purple); border-bottom: 0; }
 }
+
+/* Revisions */
+.about-text p { text-align: justify; hyphens: auto; }
+.grid.four { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 640px) { .grid.four { grid-template-columns: 1fr; } }
+.outline { background: transparent; border: 0; box-shadow: none; padding: 4px 0 0; margin-bottom: 18px; }
+.outline-label { color: var(--muted); }
+.outline li::marker { color: var(--muted); font-weight: 600; }
+.post { margin-top: 0; padding-top: 30px; }

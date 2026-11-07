@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Two ways to make handwritten-style notes with AI, and why one costs about 10x less"
+title: "Two ways to make handwritten-style notes with AI, and why one uses far fewer tokens"
 series: "Learning Log #1"
-summary: "Everyone shares those beautiful handwritten study notes. Here is how they are made, what the simple method costs in tokens, and the cheaper method I use."
+summary: "Everyone shares those beautiful handwritten study notes. Here is how I first made them with one long prompt, and the cheaper method I use now."
 date: 2026-11-07 00:00:00 +0100
 resources:
   - name: "Handwritten Notes Maker on GitHub"
@@ -10,77 +10,66 @@ resources:
     note: "notebook, format guide and prompt in one folder"
 outline:
   - "What I wanted: handwritten-style notes for interview prep"
-  - "Method 1: one big prompt, the AI does everything (and what it costs)"
-  - "Method 2: fix the look once, let the AI write only the content"
+  - "Method 1: one long prompt, Claude makes the whole PDF"
+  - "Method 2: the design is fixed, Claude writes only the content"
   - "The two methods as a flow"
   - "What I learned"
 ---
 
 **What I wanted:** handwritten-looking notes for my interview prep (DAX, SQL, Power BI), like the ones people share online, without drawing them by hand.
 
-## Method 1: one big prompt, the AI does everything
+## Method 1: one long prompt, Claude makes the whole PDF
 
-The simple way is one long instruction. This is the kind of prompt I started with, rebuilt from the design my notebook ended up with:
+My first approach was one long prompt, the same one for every topic. In short, it asked Claude to:
 
-> "Create complete study notes on DAX as a single HTML file that looks like a real handwritten spiral notebook, A4 pages.
-> - Handwriting font (Kalam), plus a clearer font for capital I so 'I2' never reads as '12'.
-> - A spiral binding down the left edge, hand-drawn wobbly borders on every box, table and code block.
-> - A boxed title on every page, section headings that rotate through blue, teal, red, green, purple and amber ink.
-> - Yellow highlighter, keyboard key caps, coloured ink words and small doodle icons (bulb, star, robot, mail).
-> - Callout boxes for tips, warnings and examples, sticky notes in rotating yellow, pink, blue and green with a tape strip, and a cloud for the takeaway on every page.
-> - Numbered step cards, two-column layouts, a question and answer section, and n8n-style flow diagrams with arrows.
-> - A cover page with icons and chips, a contents page, page numbers in little circles, and ruled 'my notes' lines in any empty space.
-> - Cover every function with worked examples on a realistic business dataset, with correct results.
-> Keep all CSS and SVG inline."
+> Make handwritten-style notes on *[topic]* as a PDF. Check reference websites first, then write as many pages as needed so that I really understand the concept.
 
-**What happens:** the AI has to write the content and all the visual code (HTML, CSS, SVG doodles) in every answer.
+I didn't specify any fonts or design. Claude chose the look, researched the topic, wrote the content and built the PDF, all in one go.
 
-**Token cost (my estimates):**
-- **What the "look" costs:** the styling engine I use in Method 2 is about 41,500 characters of code, roughly 10,000 tokens. In Method 1 the AI rewrites something like that inside every answer.
-- **Markup outweighs content:** markup is usually several times larger than the text it wraps, so a 10-page set of notes can easily run to tens of thousands of output tokens.
-- **Every change costs the full amount again:** "make the headings blue" means the whole file is regenerated.
-- **Long answers hit limits:** notes get cut off halfway, or the style drifts between runs.
+**Why it costs a lot of tokens:**
+- **Claude does every job:** research, writing, layout and creating the PDF itself. All of that work counts.
+- **"As many pages as possible" means a very long answer.**
+- **Every new topic repeats the full job,** including the design work.
+- **Any fix means another full run.** And the look changes a little every time.
 
-## Method 2: fix the look once, let the AI write only the content
+## Method 2: the design is fixed, Claude writes only the content
 
-**Step 1: Fix fonts and requirements once (a Python notebook).**
-- Handwriting fonts: Kalam, plus Delius for a clearer capital "I" so "I2" never reads as "12".
-- Packages: `markdown-it-py`, `mdit-py-plugins`, `beautifulsoup4`, `pyyaml` and `playwright` (with Chromium to print the PDF). The first run installs everything; later runs take seconds.
-- Settings live in one cell: input file, output file, ink colours, optional "my notes" lines at the bottom of each page.
+**Step 1: The design is fixed once, in a Python notebook.**
+- Fonts, colours and page style never change: Kalam handwriting, plus Delius for a clearer capital "I" so "I2" never reads as "12".
+- Settings live in one cell: input file, output file and ink colours.
 
-**Step 2: Claude writes content only, using web sources.**
-- I give it a short prompt (about 600 tokens) plus my two-page format guide (about 570 tokens). The guide lists the markers the notebook understands: `# Page`, `==highlight==`, `[[Ctrl]]` keys, `{r:red ink}`, `> tip:`, `::: box`, `::: steps`, `::: flow`, `> takeaway:` and so on.
-- The prompt asks for the official docs, a real business dataset, worked examples with correct results, common traps, and a takeaway on every page.
-- Claude returns one plain Markdown file. No styling code at all.
+**Step 2: Claude writes the content only, in Markdown.**
+- I give it a short prompt (about 600 tokens) plus my two-page format guide (about 570 tokens). The guide lists the markers the notebook understands, such as `==highlight==`, `> tip:`, `::: box` and `> takeaway:`.
+- Claude uses official docs as sources and returns one plain Markdown file. This is the only step that uses Claude, and Markdown is short.
 
-**Step 3: Run the notebook.**
-- It reads the Markdown and draws the spiral binding, wobbly boxes, clouds, sticky notes and doodles, then prints the PDF locally with Playwright.
-- Styling costs zero tokens. Re-render as often as you like.
+**Step 3: The notebook builds the PDF on my laptop.**
+- It turns the Markdown into an HTML page first, because HTML lines the text up properly, then prints that page to PDF.
+- It doesn't matter how many HTML files or formats it creates along the way. This all runs locally, so it costs nothing.
 
 ## The two methods as a flow
 
 <div class="flows">
   <div class="flow m1">
-    <p class="flow-title">Method 1 · the AI does everything</p>
+    <p class="flow-title">Method 1 · Claude does everything</p>
     <div class="flow-row">
-      <div class="node">One long prompt<small>content + every design detail</small></div>
+      <div class="node">One long prompt<small>same for every topic</small></div>
       <div class="arrow"></div>
-      <div class="node hot">Claude writes it all<small>text + HTML, CSS, SVG doodles</small></div>
+      <div class="node hot">Claude researches, writes and designs<small>reference websites, as many pages as possible</small></div>
       <div class="arrow"></div>
-      <div class="node">Notes file<small>looks a bit different each run</small></div>
+      <div class="node hot">Claude creates the PDF<small>all inside Claude</small></div>
     </div>
-    <div class="loop hot-loop">↺ Want a change? Claude rewrites the whole file, and you pay the tokens again</div>
+    <div class="loop hot-loop">↺ New topic or a fix? Claude repeats the whole job, and every step uses tokens</div>
   </div>
   <div class="flow m2">
-    <p class="flow-title">Method 2 · split the job</p>
+    <p class="flow-title">Method 2 · Claude writes, my notebook builds</p>
     <div class="flow-row">
       <div class="node once">Design fixed once<small>Python notebook: fonts, colours, layout</small></div>
       <div class="arrow"></div>
-      <div class="node">Short prompt + format guide<small>about 1,200 tokens in</small></div>
+      <div class="node ai">Claude writes content only<small>Markdown, the only step that uses tokens</small></div>
       <div class="arrow"></div>
-      <div class="node ai">Claude writes content only<small>plain Markdown</small></div>
+      <div class="node free">Markdown to HTML<small>on my laptop, free</small></div>
       <div class="arrow"></div>
-      <div class="node free">Notebook draws the PDF<small>on my laptop, 0 tokens</small></div>
+      <div class="node free">HTML to PDF<small>on my laptop, free</small></div>
     </div>
     <div class="loop free-loop">↺ Want a change? Edit one setting and re-run, for free</div>
   </div>
@@ -89,6 +78,6 @@ The simple way is one long instruction. This is the kind of prompt I started wit
 ## What I learned
 
 - **Separate content from design.** It's the same idea as a template in Word or a theme in Power BI.
-- **Spend AI tokens on thinking, not formatting.**
+- **Use the AI only where it adds value.** Writing the content needs Claude. Building the PDF doesn't.
 - **A two-page "format guide" is a better prompt than a long description of the look.**
 - **You don't need to be a developer.** I built the notebook by describing what I wanted to Claude and checking each page.
