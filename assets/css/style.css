@@ -214,3 +214,29 @@ section, .post-section { scroll-margin-top: 84px; }
   .brand { font-size: 1.15rem; }
   .nav nav a { font-size: .8rem; }
 }
+
+/* Flow charts inside posts */
+.flows { display: grid; gap: 22px; margin-top: 6px; }
+.flow { border-radius: 14px; padding: 18px; background: var(--tint); }
+.flow.m1 { background: #FDF0F4; }
+.flow.m2 { background: #EEF2FD; }
+.flow-title { margin: 0 0 14px; font-weight: 700; color: var(--purple); }
+.flow-row { display: flex; align-items: stretch; gap: 0; }
+.node { flex: 1 1 0; background: #fff; border: 2px solid var(--peri); border-radius: 12px; padding: 12px; font-weight: 700; color: var(--purple); text-align: center; font-size: .95rem; line-height: 1.3; display: flex; flex-direction: column; justify-content: center; }
+.node small { display: block; font-weight: 500; color: var(--muted); font-size: .8rem; margin-top: 4px; }
+.node.hot { border-color: var(--coral); background: #FFF6F9; }
+.node.once { border-color: var(--purple); border-style: dashed; }
+.node.ai { border-color: var(--blue); }
+.node.free { border-color: #3BAA78; background: #F2FBF6; }
+.arrow { flex: 0 0 34px; position: relative; }
+.arrow::before { content: ""; position: absolute; left: 4px; right: 10px; top: 50%; height: 3px; background: var(--purple); transform: translateY(-50%); border-radius: 2px; }
+.arrow::after { content: ""; position: absolute; right: 2px; top: 50%; transform: translateY(-50%); border: 7px solid transparent; border-left: 10px solid var(--purple); border-right: 0; }
+.loop { margin-top: 12px; padding: 8px 14px; border-radius: 10px; font-weight: 600; font-size: .92rem; }
+.hot-loop { background: #FBE1E9; color: #9C2650; }
+.free-loop { background: #DFF5E9; color: #1E6B45; }
+@media (max-width: 700px) {
+  .flow-row { flex-direction: column; }
+  .arrow { flex: 0 0 30px; }
+  .arrow::before { left: 50%; right: auto; top: 3px; bottom: 9px; width: 3px; height: auto; transform: translateX(-50%); }
+  .arrow::after { left: 50%; right: auto; top: auto; bottom: 0; transform: translateX(-50%); border: 7px solid transparent; border-top: 10px solid var(--purple); border-bottom: 0; }
+}

@@ -5,23 +5,14 @@ series: "Learning Log #1"
 summary: "Everyone shares those beautiful handwritten study notes. Here is how they are made, what the simple method costs in tokens, and the cheaper method I use."
 date: 2026-11-07 00:00:00 +0100
 resources:
-  - name: "Handwritten Notes Maker (project folder)"
+  - name: "Handwritten Notes Maker on GitHub"
     url: "https://github.com/vgs1004/MyProjects/tree/main/Handwritten%20Notes%20Maker%20%28Python%29"
-    note: "everything in one place"
-  - name: "handwritten_notes_maker.ipynb"
-    url: "https://github.com/vgs1004/MyProjects/blob/main/Handwritten%20Notes%20Maker%20%28Python%29/handwritten_notes_maker.ipynb"
-    note: "the Python notebook that draws the PDF"
-  - name: "notes_format_guide.md"
-    url: "https://github.com/vgs1004/MyProjects/blob/main/Handwritten%20Notes%20Maker%20%28Python%29/notes_format_guide.md"
-    note: "every marker the notebook understands"
-  - name: "content_prompt.txt"
-    url: "https://github.com/vgs1004/MyProjects/blob/main/Handwritten%20Notes%20Maker%20%28Python%29/content_prompt.txt"
-    note: "the prompt I give Claude for the content"
+    note: "notebook, format guide and prompt in one folder"
 outline:
   - "What I wanted: handwritten-style notes for interview prep"
   - "Method 1: one big prompt, the AI does everything (and what it costs)"
   - "Method 2: fix the look once, let the AI write only the content"
-  - "Side by side: tokens, consistency, effort"
+  - "The two methods as a flow"
   - "What I learned"
 ---
 
@@ -66,16 +57,34 @@ The simple way is one long instruction. This is the kind of prompt I started wit
 - It reads the Markdown and draws the spiral binding, wobbly boxes, clouds, sticky notes and doodles, then prints the PDF locally with Playwright.
 - Styling costs zero tokens. Re-render as often as you like.
 
-## Side by side
+## The two methods as a flow
 
-| | Method 1: AI does everything | Method 2: content only + Python |
-|---|---|---|
-| What the AI writes | Content + all styling code | Content in plain Markdown |
-| Output tokens | High, mostly markup | Roughly a tenth (estimate) |
-| Change a colour | Pay again for the whole file | Edit one setting, re-run, free |
-| Consistency | Varies run to run | Same look every time |
-| Long topics | Gets cut off | Split into several Markdown files |
-| Setup | None | One-time notebook setup |
+<div class="flows">
+  <div class="flow m1">
+    <p class="flow-title">Method 1 · the AI does everything</p>
+    <div class="flow-row">
+      <div class="node">One long prompt<small>content + every design detail</small></div>
+      <div class="arrow"></div>
+      <div class="node hot">Claude writes it all<small>text + HTML, CSS, SVG doodles</small></div>
+      <div class="arrow"></div>
+      <div class="node">Notes file<small>looks a bit different each run</small></div>
+    </div>
+    <div class="loop hot-loop">↺ Want a change? Claude rewrites the whole file, and you pay the tokens again</div>
+  </div>
+  <div class="flow m2">
+    <p class="flow-title">Method 2 · split the job</p>
+    <div class="flow-row">
+      <div class="node once">Design fixed once<small>Python notebook: fonts, colours, layout</small></div>
+      <div class="arrow"></div>
+      <div class="node">Short prompt + format guide<small>about 1,200 tokens in</small></div>
+      <div class="arrow"></div>
+      <div class="node ai">Claude writes content only<small>plain Markdown</small></div>
+      <div class="arrow"></div>
+      <div class="node free">Notebook draws the PDF<small>on my laptop, 0 tokens</small></div>
+    </div>
+    <div class="loop free-loop">↺ Want a change? Edit one setting and re-run, for free</div>
+  </div>
+</div>
 
 ## What I learned
 

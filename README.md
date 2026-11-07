@@ -26,4 +26,8 @@ image: /files/log-02-cover.png   # optional: a cover image, also good for the Li
 
 4. Click **Commit changes**. The site updates in about a minute. The post appears in the Learning Log section of the home page, newest first, and also gets its own link for sharing on LinkedIn.
 
-Files for downloads (PDF notes, images) go in the `files/` folder. Link them as `/files/name.pdf`.
+## Add images or PDFs
+
+1. Open the `files` folder, click **Add file**, then **Upload files**, and drop in your images or PDFs.
+2. Use simple names without spaces, for example `log-01-cover.png` or `dax-notes.pdf`.
+3. Click **Commit changes**. Then add `image: /files/log-01-cover.png` to the post's top block, or link a PDF in the post as `[DAX notes (PDF)](/files/dax-notes.pdf)`.
