@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Two ways to make handwritten-style notes with AI, and why one uses far fewer tokens"
+title: "Two ways to make handwritten-style notes with AI, and why I switched"
 series: "Learning Log #1"
-summary: "Everyone shares those beautiful handwritten study notes. Here is how I first made them with one long prompt, and the cheaper method I use now."
+summary: "Everyone shares those beautiful handwritten study notes. Here is how I first made them with one long prompt, and the method I use now: about 30% fewer tokens, and free layout edits."
 date: 2026-11-07 00:00:00 +0100
 resources:
   - name: "Handwritten Notes Maker on GitHub"
@@ -31,11 +31,7 @@ My first approach was one long prompt, the same one for every topic:
 
 I described the look in one sentence and left everything else (fonts, layout, how many pages) to Claude. Claude researched the topic, wrote the content, designed the pages and built the PDF, all in one go.
 
-**Why it costs a lot of tokens:**
-- **Claude does every job:** research, writing, layout and creating the PDF itself. All of that work counts.
-- **"As many pages as needed" means a very long answer.**
-- **Every new topic repeats the full job,** including the design work.
-- **Any fix means another full run.** And the look changes from topic to topic.
+It works well for a single guide. The catch is that Claude also has to build the layout each time, and any layout fix (a box that overflows, text out of line) means another round in Claude.
 
 ## Method 2: the design is fixed, Claude writes only the content
 
@@ -52,6 +48,13 @@ I described the look in one sentence and left everything else (fonts, layout, ho
 - It turns the Markdown into an HTML page first, because HTML lines the text up properly, then prints that page to PDF.
 - It doesn't matter how many HTML files or formats it creates along the way. This all runs locally, so it costs nothing.
 
+**Why I prefer it:**
+- **Alignment is handled for me.** Text, tables and boxes line up the same way on every page.
+- **Layout edits are free.** Change a colour, a font or the page style in one setting and re-run. No new Claude chat.
+- **Every guide looks the same,** so my notes feel like one notebook.
+- **Claude's effort goes into the content:** research, explanations, examples and the Key Takeaway on each page.
+- **Long topics are easy.** I split them into several Markdown files and build each one locally.
+
 ## The two methods as a flow
 
 <div class="flows">
@@ -64,7 +67,7 @@ I described the look in one sentence and left everything else (fonts, layout, ho
       <div class="arrow"></div>
       <div class="node hot">Claude creates the PDF<small>all inside Claude</small></div>
     </div>
-    <div class="loop hot-loop">↺ New topic or a fix? Claude repeats the whole job, and every step uses tokens</div>
+    <div class="loop hot-loop">↺ Layout fix? Another round in Claude</div>
   </div>
   <div class="flow m2">
     <p class="flow-title">Method 2 · Claude writes, my notebook builds</p>
@@ -81,16 +84,31 @@ I described the look in one sentence and left everything else (fonts, layout, ho
   </div>
 </div>
 
+## Average tokens per guide
+
+A planning estimate for a 20-page guide with the same research and roughly the same amount of text. These are averages, not measured usage.
+
+| Work Claude does | Method 1 | Method 2 |
+|---|---:|---:|
+| My instructions (prompt, plus format guide in Method 2) | ~300 | ~2,200 |
+| Research and source reading | ~15,000 | ~15,000 |
+| Writing the guide | ~7,000 | ~8,000 |
+| Building the PDF, checking pages, fixing layout | ~10,000 | 0 (Python on my laptop) |
+| **Total** | **~32,000** | **~25,000** |
+| **Of which Claude writes** | **~17,000** | **~8,000** |
+
+So Method 2 uses **about 20 to 30% fewer tokens per guide**, and Claude writes **about half as much**. The saving grows when a layout needs several rounds of fixes, because in Method 2 those happen on my laptop for free.
+
 ## What each method produced
 
 <div class="compare">
   <figure>
     <a href="/files/log-01-method1-page.jpg"><img src="/files/log-01-method1-page.jpg" alt="A page from the Method 1 SQL notes"></a>
-    <figcaption><strong>Method 1:</strong> SQL notes, 25 pages. Claude chose the whole design.</figcaption>
+    <figcaption><strong>Method 1:</strong> SQL notes, 25 pages. Claude designed and built the PDF.</figcaption>
   </figure>
   <figure>
     <a href="/files/log-01-method2-page.jpg"><img src="/files/log-01-method2-page.jpg" alt="A page from the Method 2 n8n notes"></a>
-    <figcaption><strong>Method 2:</strong> n8n notes, 42 pages. Same design every time, built for free.</figcaption>
+    <figcaption><strong>Method 2:</strong> n8n notes, 42 pages. Same layout every time, built locally for free.</figcaption>
   </figure>
 </div>
 
