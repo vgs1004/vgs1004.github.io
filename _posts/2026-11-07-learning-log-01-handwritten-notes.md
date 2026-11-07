@@ -4,6 +4,19 @@ title: "Two ways to make handwritten-style notes with AI, and why one costs abou
 series: "Learning Log #1"
 summary: "Everyone shares those beautiful handwritten study notes. Here is how they are made, what the simple method costs in tokens, and the cheaper method I use."
 date: 2026-11-07 00:00:00 +0100
+resources:
+  - name: "Handwritten Notes Maker (project folder)"
+    url: "https://github.com/vgs1004/MyProjects/tree/main/Handwritten%20Notes%20Maker%20%28Python%29"
+    note: "everything in one place"
+  - name: "handwritten_notes_maker.ipynb"
+    url: "https://github.com/vgs1004/MyProjects/blob/main/Handwritten%20Notes%20Maker%20%28Python%29/handwritten_notes_maker.ipynb"
+    note: "the Python notebook that draws the PDF"
+  - name: "notes_format_guide.md"
+    url: "https://github.com/vgs1004/MyProjects/blob/main/Handwritten%20Notes%20Maker%20%28Python%29/notes_format_guide.md"
+    note: "every marker the notebook understands"
+  - name: "content_prompt.txt"
+    url: "https://github.com/vgs1004/MyProjects/blob/main/Handwritten%20Notes%20Maker%20%28Python%29/content_prompt.txt"
+    note: "the prompt I give Claude for the content"
 outline:
   - "What I wanted: handwritten-style notes for interview prep"
   - "Method 1: one big prompt, the AI does everything (and what it costs)"

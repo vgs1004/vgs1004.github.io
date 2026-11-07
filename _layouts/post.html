@@ -1,14 +1,49 @@
 ---
 layout: default
 ---
-<article class="wrap post">
-  <a class="back" href="{{ '/#blog' | relative_url }}">← Back to the site</a>
-  <p class="kicker">{{ page.series | default: 'Blog' }} · {{ page.date | date: '%-d %B %Y' }}</p>
-  <h1>{{ page.title }}</h1>
-  {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
-  <div class="post-body">
-    {{ content }}
+<div class="post-hero">
+  <div class="wrap post-wrap">
+    <a class="back" href="{{ '/#blog' | relative_url }}">← Back to all posts</a>
+    <p class="kicker light">{{ page.series | default: 'Blog' }} · {{ page.date | date: '%-d %B %Y' }}</p>
+    <h1>{{ page.title }}</h1>
+    {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
   </div>
-  <hr>
-  <p class="post-cta">Have a question or an idea for the next Learning Log? <a href="https://www.linkedin.com/in/{{ site.linkedin }}">Message me on LinkedIn</a>.</p>
+</div>
+
+<article class="wrap post-wrap post">
+  {% if page.image %}<img class="post-cover" src="{{ page.image | relative_url }}" alt="{{ page.title }}">{% endif %}
+
+  {% if page.outline %}
+  <div class="outline">
+    <p class="outline-label">In this post</p>
+    <ol>{% for item in page.outline %}<li>{{ item }}</li>{% endfor %}</ol>
+  </div>
+  {% endif %}
+
+  {% assign parts = content | split: '<h2' %}
+  {% for part in parts %}
+    {% assign trimmed = part | strip %}
+    {% if trimmed != '' %}
+      {% if forloop.first %}
+        <section class="post-section intro">{{ part }}</section>
+      {% else %}
+        <section class="post-section"><h2{{ part }}</section>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+  {% if page.resources %}
+  <section class="post-section resources">
+    <h2>Files from this post</h2>
+    <ul>
+      {% for r in page.resources %}<li><a href="{{ r.url }}">{{ r.name }}</a>{% if r.note %} · {{ r.note }}{% endif %}</li>{% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  <div class="post-end">
+    <p>Have a question or an idea for the next Learning Log?</p>
+    <a class="btn primary" href="https://www.linkedin.com/in/{{ site.linkedin }}">Message me on LinkedIn</a>
+    <a class="btn ghost" href="{{ '/#blog' | relative_url }}">More posts</a>
+  </div>
 </article>

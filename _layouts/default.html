@@ -7,32 +7,45 @@
   {% feed_meta %}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
+  {% if page.url == '/' %}{% assign base = '' %}{% else %}{% assign base = '/' | relative_url %}{% endif %}
   <header class="site-header">
     <div class="wrap nav">
-      <a class="brand" href="{{ '/' | relative_url }}">Varshini<span>.</span></a>
+      <a class="brand" href="{{ base }}#top">Varshini<span>.</span></a>
       <nav>
-        {% if page.url == '/' %}{% assign base = '' %}{% else %}{% assign base = '/' | relative_url %}{% endif %}
         <a href="{{ base }}#about">About</a>
         <a href="{{ base }}#experience">Experience</a>
         <a href="{{ base }}#projects">Projects</a>
         <a href="{{ base }}#blog">Blog</a>
-        <a href="{{ base }}#contact">Contact</a>
+        <a class="nav-cta" href="{{ base }}#contact">Contact</a>
       </nav>
     </div>
   </header>
-  <main>
+  <main id="top">
     {{ content }}
   </main>
   <footer class="site-footer">
-    <div class="wrap">
-      <p>© {{ site.time | date: '%Y' }} Varshini Gayathri Suresh · Aachen, Germany ·
-        <a href="https://www.linkedin.com/in/{{ site.linkedin }}">LinkedIn</a> ·
-        <a href="https://github.com/{{ site.github }}">GitHub</a></p>
+    <div class="wrap footer-inner">
+      <p>© {{ site.time | date: '%Y' }} Varshini Gayathri Suresh · Aachen, Germany</p>
+      <p><a href="https://www.linkedin.com/in/{{ site.linkedin }}">LinkedIn</a> · <a href="https://github.com/{{ site.github }}">GitHub</a> · <a href="mailto:{{ site.email }}">Email</a></p>
     </div>
   </footer>
+  <script>
+    // Gentle fade-in as sections scroll into view (skipped if the visitor prefers less motion)
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        els.forEach(function (el) { el.classList.add('shown'); }); return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('shown'); io.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 </body>
 </html>
