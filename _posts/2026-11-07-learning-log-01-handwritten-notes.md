@@ -107,7 +107,7 @@ So Method 2 uses **about 20 to 30% fewer tokens per guide**, and Claude writes *
     <figcaption><strong>Method 1:</strong> SQL notes, 25 pages. Claude designed and built the PDF.</figcaption>
   </figure>
   <figure>
-    <a href="/files/log-01-method2-page.jpg"><img src="/files/log-01-method2-page.jpg" alt="A page from the Method 2 n8n notes"></a>
+    <a href="/files/log-01-method2-page-v2.jpg"><img src="/files/log-01-method2-page-v2.jpg" alt="A page from the Method 2 n8n notes"></a>
     <figcaption><strong>Method 2:</strong> n8n notes, 42 pages. Same layout every time, built locally for free.</figcaption>
   </figure>
 </div>
