@@ -1,0 +1,20 @@
+---
+layout: default
+title: Learning Log
+---
+<section>
+  <div class="wrap" style="max-width:760px">
+    <p class="kicker">Blog</p>
+    <h1 style="font-size:2.4rem;margin:.2rem 0 .6rem">Learning Log</h1>
+    <p class="lead" style="color:var(--muted)">One thing I learned each week, with the prompts, notes and links behind it.</p>
+    <ul class="post-list">
+      {% for post in site.posts %}
+      <li>
+        <span class="date">{{ post.series }} · {{ post.date | date: '%-d %B %Y' }}</span><br>
+        <a class="title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        {% if post.summary %}<p>{{ post.summary }}</p>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>

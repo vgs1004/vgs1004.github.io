@@ -1,0 +1,17 @@
+title: Varshini Gayathri Suresh
+tagline: IT Business Analyst · PMO · Data and Reporting
+description: Portfolio and Learning Log of Varshini Gayathri Suresh, IT Business Analyst and PMO professional based in Aachen, Germany.
+url: https://vgs1004.github.io
+baseurl: ""
+author: Varshini Gayathri Suresh
+email: varshinigayathrisuresh@gmail.com
+linkedin: vgs1004
+github: vgs1004
+permalink: /blog/:year/:month/:title/
+markdown: kramdown
+timezone: Europe/Berlin
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+exclude:
+  - README.md
