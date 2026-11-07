@@ -14,10 +14,16 @@ layout: post
 title: "Your post title"
 series: "Learning Log #2"
 summary: "One or two sentences shown in the post list."
-date: 2026-11-14 10:00:00 +0100
+date: 2026-11-14 00:00:00 +0100
+outline:
+  - "The question I started with"
+  - "What I tried"
+  - "What worked (with an example)"
+  - "What I learned"
+image: /files/log-02-cover.png   # optional: a cover image, also good for the LinkedIn post
 ---
 ```
 
-4. Click **Commit changes**. The site updates in about a minute.
+4. Click **Commit changes**. The site updates in about a minute. The post appears in the Learning Log section of the home page, newest first, and also gets its own link for sharing on LinkedIn.
 
 Files for downloads (PDF notes, images) go in the `files/` folder. Link them as `/files/name.pdf`.

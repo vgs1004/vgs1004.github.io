@@ -15,7 +15,7 @@ title: Home
     </div>
     <div class="buttons">
       <a class="btn primary" href="#contact">Get in touch</a>
-      <a class="btn ghost" href="{{ '/blog/' | relative_url }}">Read the Learning Log</a>
+      <a class="btn ghost" href="#blog">Read the Learning Log</a>
     </div>
   </div>
 </section>
@@ -26,7 +26,7 @@ title: Home
       <h2>About me</h2>
       <p>I work where business needs meet delivery. At <strong>PwC India</strong> (Advisory, Cyber) I owned the monthly requirement-to-release cycle for a programme running across India, Sri Lanka and Bangladesh. I translated business requirements into specifications, ran manual testing and UAT, coordinated client sign-off, and trained support teams at every release.</p>
       <p>In Aachen I joined <strong>aixigo AG</strong> (Amundi Technology) in Delivery Operations and Governance. I built a Power BI portfolio-health dashboard from 7 to 10 SAP reports, automated a monthly KPI calculation, and wrote the governance documentation project managers rely on.</p>
-      <p>Alongside work I completed an MSc in Data Analytics and Decision Sciences at RWTH Aachen University (thesis submitted). I like making messy processes clear, and I write about what I learn in my weekly <a href="{{ '/blog/' | relative_url }}">Learning Log</a>.</p>
+      <p>Alongside work I completed an MSc in Data Analytics and Decision Sciences at RWTH Aachen University (thesis submitted). I like making messy processes clear, and I write about what I learn in my weekly <a href="#blog">Learning Log</a>.</p>
     </div>
     <ul class="facts card">
       <li><strong>Based in</strong><br>Aachen, Germany</li>
@@ -127,17 +127,29 @@ title: Home
 
 <section id="blog" class="alt">
   <div class="wrap">
-    <h2>Latest from the Learning Log</h2>
-    <ul class="post-list">
-      {% for post in site.posts limit:3 %}
-      <li>
-        <span class="date">{{ post.date | date: '%-d %B %Y' }}</span><br>
-        <a class="title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    <h2>Learning Log</h2>
+    <p>One thing I learned each week, with the prompts, notes and links behind it.</p>
+    <div class="posts">
+      {% for post in site.posts %}
+      <article class="post-card" id="{{ post.slug }}">
+        {% if post.image %}<img class="post-cover" src="{{ post.image | relative_url }}" alt="{{ post.title }}">{% endif %}
+        <p class="kicker">{{ post.series }} · {{ post.date | date: '%-d %B %Y' }}</p>
+        <h3 class="post-title">{{ post.title }}</h3>
         {% if post.summary %}<p>{{ post.summary }}</p>{% endif %}
-      </li>
+        {% if post.outline %}
+        <div class="outline">
+          <p class="outline-label">In this post</p>
+          <ol>{% for item in post.outline %}<li>{{ item }}</li>{% endfor %}</ol>
+        </div>
+        {% endif %}
+        <details>
+          <summary>Read the full post</summary>
+          <div class="post-body">{{ post.content }}</div>
+          <p class="share">Link to share: <a href="{{ post.url | relative_url }}">{{ site.url }}{{ post.url }}</a></p>
+        </details>
+      </article>
       {% endfor %}
-    </ul>
-    <p><a href="{{ '/blog/' | relative_url }}">All posts →</a></p>
+    </div>
   </div>
 </section>
 

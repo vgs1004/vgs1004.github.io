@@ -4,15 +4,30 @@ title: "Two ways to make handwritten-style notes with AI, and why one costs abou
 series: "Learning Log #1"
 summary: "Everyone shares those beautiful handwritten study notes. Here is how they are made, what the simple method costs in tokens, and the cheaper method I use."
 date: 2026-11-07 00:00:00 +0100
+outline:
+  - "What I wanted: handwritten-style notes for interview prep"
+  - "Method 1: one big prompt, the AI does everything (and what it costs)"
+  - "Method 2: fix the look once, let the AI write only the content"
+  - "Side by side: tokens, consistency, effort"
+  - "What I learned"
 ---
 
 **What I wanted:** handwritten-looking notes for my interview prep (DAX, SQL, Power BI), like the ones people share online, without drawing them by hand.
 
 ## Method 1: one big prompt, the AI does everything
 
-The simple way is one long instruction. A typical example:
+The simple way is one long instruction. This is the kind of prompt I started with, rebuilt from the design my notebook ended up with:
 
-> "Create complete handwritten-style study notes on DAX as a single HTML file. Make it look like a real spiral notebook: handwriting font, wobbly boxes, highlighter, sticky notes in rotating colours, doodle icons, flow diagrams, a cover page and a contents page. Cover every function with worked examples. Keep all CSS and SVG inline."
+> "Create complete study notes on DAX as a single HTML file that looks like a real handwritten spiral notebook, A4 pages.
+> - Handwriting font (Kalam), plus a clearer font for capital I so 'I2' never reads as '12'.
+> - A spiral binding down the left edge, hand-drawn wobbly borders on every box, table and code block.
+> - A boxed title on every page, section headings that rotate through blue, teal, red, green, purple and amber ink.
+> - Yellow highlighter, keyboard key caps, coloured ink words and small doodle icons (bulb, star, robot, mail).
+> - Callout boxes for tips, warnings and examples, sticky notes in rotating yellow, pink, blue and green with a tape strip, and a cloud for the takeaway on every page.
+> - Numbered step cards, two-column layouts, a question and answer section, and n8n-style flow diagrams with arrows.
+> - A cover page with icons and chips, a contents page, page numbers in little circles, and ruled 'my notes' lines in any empty space.
+> - Cover every function with worked examples on a realistic business dataset, with correct results.
+> Keep all CSS and SVG inline."
 
 **What happens:** the AI has to write the content and all the visual code (HTML, CSS, SVG doodles) in every answer.
 

@@ -15,10 +15,12 @@
     <div class="wrap nav">
       <a class="brand" href="{{ '/' | relative_url }}">Varshini<span>.</span></a>
       <nav>
-        <a href="{{ '/#about' | relative_url }}">About</a>
-        <a href="{{ '/#projects' | relative_url }}">Projects</a>
-        <a href="{{ '/blog/' | relative_url }}">Blog</a>
-        <a href="{{ '/#contact' | relative_url }}">Contact</a>
+        {% if page.url == '/' %}{% assign base = '' %}{% else %}{% assign base = '/' | relative_url %}{% endif %}
+        <a href="{{ base }}#about">About</a>
+        <a href="{{ base }}#experience">Experience</a>
+        <a href="{{ base }}#projects">Projects</a>
+        <a href="{{ base }}#blog">Blog</a>
+        <a href="{{ base }}#contact">Contact</a>
       </nav>
     </div>
   </header>
