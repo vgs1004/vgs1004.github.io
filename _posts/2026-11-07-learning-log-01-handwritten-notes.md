@@ -44,7 +44,8 @@ I described the look in one sentence and left everything else (fonts, layout, ho
 - Settings live in one cell: input file, output file and ink colours.
 
 **Step 2: Claude writes the content only, in Markdown.**
-- I give it a short prompt (about 600 tokens) plus my two-page format guide (about 570 tokens). The guide lists the markers the notebook understands, such as `==highlight==`, `> tip:`, `::: box` and `> takeaway:`.
+- I give it my content prompt (about 1,000 tokens) plus my three-page format guide (about 1,200 tokens). The guide lists the markers the notebook understands, such as `==highlight==`, `> tip:`, `::: box`, `> takeaway:`, result chips and coloured code blocks.
+- The prompt also sets colour rules: every page gets a subtitle, every result goes in a table or chips, and each page fits on one A4 sheet.
 - Claude uses official docs as sources and returns one plain Markdown file. This is the only step that uses Claude, and Markdown is short.
 
 **Step 3: The notebook builds the PDF on my laptop.**
@@ -99,5 +100,5 @@ Both full PDFs are in the <a href="https://github.com/vgs1004/MyProjects/tree/ma
 
 - **Separate content from design.** It's the same idea as a template in Word or a theme in Power BI.
 - **Use the AI only where it adds value.** Writing the content needs Claude. Building the PDF doesn't.
-- **A two-page "format guide" is a better prompt than a long description of the look.**
+- **A short "format guide" is a better prompt than a long description of the look.**
 - **You don't need to be a developer.** I built the notebook by describing what I wanted to Claude and checking each page.
